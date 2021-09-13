@@ -1,0 +1,189 @@
+﻿.body {
+    margin: 0;
+    padding: 0;
+    font-size: sans-serif;
+    background: url('Bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center center;
+    object-fit: contain;
+}
+
+.box {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-60%, -60%);
+    width: 370px;
+    background: rgba(0, 0, 0, 0.5);
+    color:white;
+    padding: 25px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.box::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.box {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.panel {
+    display: flex;
+    flex-direction: row;
+    margin-top: -20px;
+}
+
+.box h2 {
+    margin: 0 0 40px;
+    padding: 0;
+    color: #f7497d;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"] {
+    height: 30px;
+    background: none;
+}
+
+.box input {
+    /* padding: 10px 0; */
+    margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #999;
+    color:white;
+}
+
+    .box input[type="submit"],
+    .box input[type="reset"] {
+        border-bottom: none;
+        cursor: pointer;
+        background: none;
+        color: rgba(247, 73, 125, 1);
+        font-size: 1rem;
+        text-transform: uppercase;
+        width: 50%;
+        border-radius: 20px;
+        height: 40px;
+        margin: 20px;
+        border: 2px solid #f7497d;
+    }
+
+.showPassword {
+    height: 10px;
+    width: 200px;
+    float: right;
+    right: -100px;
+    top: -20px;
+    padding: 10px;
+}
+
+    .showPassword > label {
+        padding-top: 9px;
+    }
+
+.box input[type="submit"]:hover,
+.box input[type="reset"]:hover {
+    color: white;
+    background-color: #f7497d;
+    transition: all 0.3s ease-in-out;
+}
+
+.box form div {
+    position: relative;
+}
+
+    .box form div label {
+        position: absolute;
+        top: 0px;
+        pointer-events: none;
+        left: 0;
+        color: rgba(0, 0, 0, 0.6);
+        transition: 0.5s;
+        color:white;
+    }
+
+.box input:focus ~ label,
+.box input:valid ~ label {
+    top: -20px;
+    left: 0px;
+    color: #f7497d;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.box input:focus,
+.box input:valid {
+    border-bottom: 2px solid #f7497d;
+    background: transparent;
+}
+
+.button {
+    display: flex;
+    margin-top: -20px;
+}
+
+.error {
+    float: right;
+    position: absolute;
+    right: 10px;
+    padding-top: 3px;
+    top: 30px;
+}
+
+.userSession {
+    float: right;
+    color: white;
+    margin-top:15px;
+}
+.user {
+    float: right;
+    right:0px;
+    color: white;
+    display:flex;
+    flex-direction:row;
+}
+.btn_logout{
+    height:fit-content;
+}
+@media (max-width: 991px) {
+    .box {
+        margin-top: 70px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 350px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        box-sizing: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+}
