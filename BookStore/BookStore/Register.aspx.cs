@@ -40,7 +40,7 @@ namespace BookStore
                     parameter = command.Parameters.Add("@email", SqlDbType.VarChar);
                     parameter.Value = u_email;
                     parameter = command.Parameters.Add("@password", SqlDbType.VarChar);
-                    parameter.Value = u_password;
+                    parameter.Value =EncryptionDecryption.EncryptString(u_password);
                     parameter = command.Parameters.Add("@role_id", SqlDbType.Int);
                     parameter.Value = 1;
                     connection.Open();
@@ -54,6 +54,8 @@ namespace BookStore
             email.Text = "";
             password.Text = "";
             confirmPassword.Text = "";
+            Response.Write("<script>alert('Registered Successfully');</script>");
+            Response.Redirect("Login.aspx");
         }
     }
 }

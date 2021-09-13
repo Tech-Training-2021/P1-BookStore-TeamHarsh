@@ -172,6 +172,9 @@ input[type="email"] {
 .btn_logout{
     height:fit-content;
 }
+.text-center{
+    text-align:center;
+}
 @media (max-width: 991px) {
     .box {
         margin-top: 70px;

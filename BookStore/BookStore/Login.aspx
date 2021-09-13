@@ -32,6 +32,10 @@
              <asp:Button runat="server"  name="submit" type="submit" ID="login" value="Login" Text="Login" OnClick="LoginUser" />
              <asp:Button runat="server" Text="Reset" type="reset" name="reset" ID="reset_login" value="Reset" />
             </div>
+            <div class="form-group text-center">
+                <span>Not a member ? <a href="Register.aspx">Register</a></span>
+              
+            </div>
         </form>
     </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"

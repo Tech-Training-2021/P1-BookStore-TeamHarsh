@@ -25,7 +25,7 @@ namespace BookStore
             SqlCommand cmd = new SqlCommand("loginuser");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@email", tb_email.Text);
-            cmd.Parameters.AddWithValue("@password", tb_password.Text);
+            cmd.Parameters.AddWithValue("@password",EncryptionDecryption.EncryptString(tb_password.Text));
             cmd.Connection = con;
             con.Open();
             UserId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -36,6 +36,7 @@ namespace BookStore
                 case -1:
                     tb_email.Text = "";
                     tb_password.Text = "";
+                    Response.Write("<script>alert('Invalid Credentials');</script>");
                     Response.Redirect("Login.aspx");
                     break;
                 default:

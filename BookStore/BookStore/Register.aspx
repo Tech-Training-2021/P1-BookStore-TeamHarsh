@@ -61,6 +61,10 @@
                 <asp:Button runat="server"  ID="register" Text="Register" OnClick="RegisterUser" />
                 <input type="reset" name="reset" id="reset" value="reset" />
             </div>
+            <div class="form-group text-center">
+                <span>Already a member ? <a href="Login.aspx">Login</a></span>
+              
+            </div>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
