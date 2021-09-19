@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class Book:IBook
+    public class Book : IBook
     {
         private BookStoreModel db;
         public Book(BookStoreModel db)
@@ -24,7 +24,6 @@ namespace Data.Repository
                   .Include("Inventory")
                   .Include("Book_Detail")
                   .Include("Publication")
-                  .Include("Customer_Review")
                   .ToList();
         }
         public Data.Entities.Book GetBookById(int id)
@@ -33,9 +32,8 @@ namespace Data.Repository
             {
                 var book = db.Books
                     .Include(i => i.Inventory)
-                    .Include(b=>b.Book_Detail1)
-                    .Include(p=>p.Publication)
-                    .Include(c=>c.Customer_Review)
+                    .Include(b => b.Book_Detail)
+                    .Include(p => p.Publication)
                     .Where(c => c.Book_Id == id)
                     .FirstOrDefault();
                 if (book != null)
@@ -88,6 +86,16 @@ namespace Data.Repository
         public void save()
         {
             db.SaveChanges();
+        }
+        public IEnumerable<Data.Entities.Store> getStore()
+        {
+            return db.Stores
+                .Include("Location")
+                .ToList(); ;
+        }
+        public IEnumerable<Data.Entities.Category> GetCategories()
+        {
+            return db.Categories.ToList();
         }
     }
 }

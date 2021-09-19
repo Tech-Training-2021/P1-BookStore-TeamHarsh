@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,32 +9,34 @@ namespace Book_Store.Models
 {
     public class Book
     {
-        /*    public int Book_Id { get; set; }
-            public int Quantity { get; set; }
-            public string Store_Id { get; set; }
-            public string Category_Name { get; set; }
-            public string Book_Name { get; set; }
-            public string Book_Author { get; set; }
-            public int Book_Price { get; set; }
-            public string Book_Description { get; set; }
-            public string ISBN_10 { get; set; }
-            public string Language { get; set; }
-            public int TotalPages { get; set; }
-            public string Book_Image { get; set; }
-
-            public string Publisher_Name { get; set; }
-            public DateTime Publication_Date { get; set; }
-
-            public int CustomerReview_Id { get; set; }*/
         public int Book_Id { get; set; }
+        public int Quantity { get; set; }
+        [DisplayName("Store Name")]
+        public string Store_Id { get; set; }
+        public string Category_Id { get; set; }
+        public int Book_Details_Id { get; set; }
+        public string Book_Name { get; set; }
 
-        public Inventory Inventory_Id { get; set; }
+        public string Book_Author { get; set; }
 
-        public BookDetails BookDetail_Id { get; set; }
+        public int Book_Price { get; set; }
 
-        public Publication Publication_Id { get; set; }
+        public string Book_Description { get; set; }
 
-        public CustomerReview CustomerReview_Id { get; set; }
+        public string ISBN_10 { get; set; }
+
+        public string Language { get; set; }
+
+        public int Total_Pages { get; set; }
+        public string Book_Image { get; set; }
+        public string Publisher_Name { get; set; }
+        public DateTime Publication_Date { get; set; }
+        //public Inventory Inventory_Id { get; set; }
+        //public BookDetails BookDetail_Id { get; set; }
+
+        //public Publication Publication_Id { get; set; }
+
+        //public List<CustomerReview> CustomerReview_Id { get; set; }
     }
     public class Inventory
     {
@@ -44,7 +48,7 @@ namespace Book_Store.Models
 
         public int Store_Id { get; set; }
 
-        public int Category_Id { get; set; }
+        public string Category_Id { get; set; }
     }
     public class BookDetails
     {

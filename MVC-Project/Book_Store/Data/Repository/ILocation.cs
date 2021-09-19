@@ -11,8 +11,8 @@ namespace Data.Repository
         IEnumerable<Data.Entities.Location> GetLocations();
         Data.Entities.Location GetLocationById(int id);
         void AddLocation(Data.Entities.Location location);
-        void UpdateLocationById(int id, Data.Entities.User user);
-        void DeleteUserById(int id);
+        void UpdateLocationById(int id, Data.Entities.Location location);
+        void DeleteLocationById(int id);
         void save();
     }
 }

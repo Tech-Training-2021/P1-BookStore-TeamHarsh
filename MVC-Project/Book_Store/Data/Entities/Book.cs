@@ -12,9 +12,7 @@ namespace Data.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            Book_Detail1 = new HashSet<Book_Detail>();
             Carts = new HashSet<Cart>();
-            Customer_Review1 = new HashSet<Customer_Review>();
             Order_Details = new HashSet<Order_Details>();
         }
 
@@ -27,14 +25,7 @@ namespace Data.Entities
 
         public int Publication_Id { get; set; }
 
-        public int CustomerReview_Id { get; set; }
-
         public virtual Book_Detail Book_Detail { get; set; }
-
-        public virtual Customer_Review Customer_Review { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book_Detail> Book_Detail1 { get; set; }
 
         public virtual Inventory Inventory { get; set; }
 
@@ -42,9 +33,6 @@ namespace Data.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer_Review> Customer_Review1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }

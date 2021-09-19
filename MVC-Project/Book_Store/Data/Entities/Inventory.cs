@@ -18,8 +18,6 @@ namespace Data.Entities
         [Key]
         public int Inventory_Id { get; set; }
 
-        public int Book_Id { get; set; }
-
         public int Quantity { get; set; }
 
         public int Store_Id { get; set; }
@@ -30,5 +28,7 @@ namespace Data.Entities
         public virtual ICollection<Book> Books { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public virtual Store Store { get; set; }
     }
 }

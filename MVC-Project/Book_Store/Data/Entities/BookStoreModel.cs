@@ -30,20 +30,8 @@ namespace Data.Entities
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>()
-                .HasMany(e => e.Book_Detail1)
-                .WithRequired(e => e.Book)
-                .HasForeignKey(e => e.Book_Id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Book>()
                 .HasMany(e => e.Carts)
                 .WithRequired(e => e.Book)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Book>()
-                .HasMany(e => e.Customer_Review1)
-                .WithRequired(e => e.Book)
-                .HasForeignKey(e => e.Book_Id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Book>()
@@ -98,12 +86,6 @@ namespace Data.Entities
                 .Property(e => e.Comment)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Customer_Review>()
-                .HasMany(e => e.Books)
-                .WithRequired(e => e.Customer_Review)
-                .HasForeignKey(e => e.CustomerReview_Id)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Inventory>()
                 .HasMany(e => e.Books)
                 .WithRequired(e => e.Inventory)
@@ -146,6 +128,11 @@ namespace Data.Entities
             modelBuilder.Entity<Store>()
                 .Property(e => e.Store_Name)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Store>()
+                .HasMany(e => e.Inventories)
+                .WithRequired(e => e.Store)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Store>()
                 .HasMany(e => e.Order_Details)

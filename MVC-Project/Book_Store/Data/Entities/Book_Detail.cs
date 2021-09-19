@@ -17,8 +17,6 @@ namespace Data.Entities
         [Key]
         public int Book_Details_Id { get; set; }
 
-        public int Book_Id { get; set; }
-
         [Required]
         [StringLength(200)]
         public string Book_Name { get; set; }
@@ -49,7 +47,5 @@ namespace Data.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Books { get; set; }
-
-        public virtual Book Book { get; set; }
     }
 }
