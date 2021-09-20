@@ -31,12 +31,6 @@ namespace Book_Store.Models
         public string Book_Image { get; set; }
         public string Publisher_Name { get; set; }
         public DateTime Publication_Date { get; set; }
-        //public Inventory Inventory_Id { get; set; }
-        //public BookDetails BookDetail_Id { get; set; }
-
-        //public Publication Publication_Id { get; set; }
-
-        //public List<CustomerReview> CustomerReview_Id { get; set; }
     }
     public class Inventory
     {

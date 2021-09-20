@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Data.Entities;
-
+using System.Net;
 namespace Book_Store.Controllers
 {
     public class BookController : Controller
@@ -34,20 +34,49 @@ namespace Book_Store.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Store = new SelectList(book.getStore(), "Store_Id", "Store_Name");
+            ViewBag.Store = new SelectList(book.GetStores(), "Store_Id", "Store_Name");
             ViewBag.Category = new SelectList(book.GetCategories(), "Category_Id", "Category_Name");
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Book_Store.Models.BookViewModel book)
+        public ActionResult Create(Book_Store.Models.BookViewModel bookData)
         {
-            return View();
+            book.AddBook(Book_Store.Mapper.BookMapper.MapDataEntities(bookData));
+            return RedirectToAction("Index");
         }
-        public string UpdateBookById(int id, Data.Entities.Book bookdata)
+
+
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            book.UpdateBookById(id, bookdata);
-            return "Book updated successfully";
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var bookdata = book.GetBookById(id);
+            if (bookdata == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ViewBag.Store = new SelectList(book.GetStores(), "Store_Id", "Store_Name");
+                ViewBag.Category = new SelectList(book.GetCategories(), "Category_Id", "Category_Name");
+                TempData["Store"] = bookdata.Inventory.Store_Id;
+                TempData["Category"] = bookdata.Inventory.Category_Id;
+
+            }
+            return View(Book_Store.Mapper.BookMapper.MapBookViewModel(bookdata));
         }
+        [HttpPost]
+        public ActionResult Edit(int id, Book_Store.Models.BookViewModel bookData)
+        {
+            if (ModelState.IsValid)
+            {
+                book.UpdateBookById(id, Book_Store.Mapper.BookMapper.MapDataEntities(bookData));
+                return RedirectToAction("Index");
+            }
+            return View(bookData);
+        }
+
         public string DeleteBookById(int id)
         {
             book.DeleteBookById(id);

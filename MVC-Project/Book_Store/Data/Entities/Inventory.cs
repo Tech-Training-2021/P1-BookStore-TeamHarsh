@@ -30,5 +30,7 @@ namespace Data.Entities
         public virtual Category Category { get; set; }
 
         public virtual Store Store { get; set; }
+
+
     }
 }

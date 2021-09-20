@@ -48,11 +48,23 @@ namespace Book_Store.Mapper
                 Publication_Date = book.Publication.Publication_Date,
             };
         }
-        public static Data.Entities.Book Map(Book_Store.Models.BookViewModel book)
+        public static Data.Entities.Book MapDataEntities(Book_Store.Models.BookViewModel book)
         {
             return new Data.Entities.Book()
             {
-                Book_Id = book.Book_Id,
+                Inventory = new Data.Entities.Inventory() { Category_Id = Convert.ToInt32(book.Category_Id), Store_Id = Convert.ToInt32(book.Store_Id), Quantity = Convert.ToInt32(book.Quantity) },
+                Publication = new Data.Entities.Publication() { Publication_Date = book.Publication_Date, Publisher_Name = book.Publisher_Name },
+                Book_Detail = new Data.Entities.Book_Detail()
+                {
+                    Book_Name = book.Book_Name,
+                    Book_Author = book.Book_Author,
+                    Book_Description = book.Book_Description,
+                    Book_Image = book.Book_Image,
+                    Book_Price = book.Book_Price,
+                    ISBN_10 = book.ISBN_10,
+                    Language = book.Language,
+                    Total_Pages = book.Total_Pages
+                }
             };
         }
 

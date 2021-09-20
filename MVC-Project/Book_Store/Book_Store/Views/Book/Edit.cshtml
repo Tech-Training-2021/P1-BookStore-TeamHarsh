@@ -1,10 +1,19 @@
 ﻿@model Book_Store.Models.BookViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
 
-<h2>Create</h2>
+        var store = @TempData["Store"];
+        $("#storeid").val(store);
+        var category = @TempData["Category"];
+        $("#categoryid").val(category);
+});
+</script>
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
@@ -25,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Store_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Store_Id, ViewBag.Store as SelectList, "Please select", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Store_Id, ViewBag.Store as SelectList, "Please select", new { @id = "storeid", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Store_Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +42,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Category_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Category_Id, ViewBag.Category as SelectList, "Please select", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Category_Id, ViewBag.Category as SelectList, "Please select", new { @id = "categoryid", @class = "form-control" })
+
                 @Html.ValidationMessageFor(model => model.Category_Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,7 +138,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
