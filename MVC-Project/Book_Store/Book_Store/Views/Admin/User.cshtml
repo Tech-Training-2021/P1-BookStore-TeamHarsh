@@ -1,15 +1,14 @@
-﻿
-@model IEnumerable<Book_Store.Models.User>
+﻿@model IEnumerable<Book_Store.Models.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "User";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>User</h2>
 
 <p>
-    @Html.ActionLink("Create New User", "AddUser")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -62,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Role_Id)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UpdateUserById", new { id = item.User_Id }) |
-                @Html.ActionLink("Details", "GetUserById", new { id = item.User_Id }) |
-                @Html.ActionLink("Delete", "DeleteUserById", new { id = item.User_Id })
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
     }

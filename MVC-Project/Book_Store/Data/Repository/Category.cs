@@ -51,7 +51,7 @@ namespace Data.Repository
             var getCategory = db.Categories.Where<Data.Entities.Category>(u => u.Category_Id == id).First();
             if (getCategory != null)
             {
-                db.Categories.AddOrUpdate(category);
+                getCategory.Category_Name = category.Category_Name;
                 save();
                 return;
             }

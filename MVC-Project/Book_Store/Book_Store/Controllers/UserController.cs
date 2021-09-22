@@ -22,9 +22,6 @@ namespace Book_Store.Controllers
         [HttpGet]
         public ActionResult Index2(Models.UserViewModel model)
         {
-            /*            dynamic mymodel = new ExpandoObject();
-                        mymodel.Register = new Book_Store.Models.Register();
-                        mymodel.Login = new Book_Store.Models.Login();*/
             return View(new Models.UserViewModel { Login = new Models.Login(), Register = new Models.Register() });
         }
         [HttpPost]

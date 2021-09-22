@@ -15,5 +15,13 @@ namespace Book_Store.Mapper
                 Category_Name = category.Category_Name
             };
         }
+        public static Data.Entities.Category Map(Book_Store.Models.Category category)
+        {
+            return new Data.Entities.Category()
+            {
+                Category_Id = category.Category_Id,
+                Category_Name = category.Category_Name
+            };
+        }
     }
 }

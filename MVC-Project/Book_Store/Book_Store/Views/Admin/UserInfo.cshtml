@@ -1,15 +1,14 @@
-﻿
-@model IEnumerable<Book_Store.Models.User>
+﻿@model IEnumerable<Book_Store.Models.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>UserInfo</h2>
 
 <p>
-    @Html.ActionLink("Create New User", "AddUser")
+    @Html.ActionLink("Create New", "AddUser")
 </p>
 <table class="table">
     <tr>
