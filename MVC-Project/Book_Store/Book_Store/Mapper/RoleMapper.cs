@@ -15,5 +15,13 @@ namespace Book_Store.Mapper
                 Role_Name = role.Role_Name
             };
         }
+        public static Data.Entities.Role Map(Book_Store.Models.Role role)
+        {
+            return new Data.Entities.Role()
+            {
+                Role1 = role.Role1,
+                Role_Name = role.Role_Name
+            };
+        }
     }
 }

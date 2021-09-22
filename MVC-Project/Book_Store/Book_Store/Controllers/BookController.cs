@@ -52,6 +52,7 @@ namespace Book_Store.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var bookdata = book.GetBookById(id);
+
             if (bookdata == null)
             {
                 return HttpNotFound();

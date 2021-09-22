@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Data;
 using Data.Entities;
 using Data.Repository;
+using System.Net;
+using System.Dynamic;
+
 namespace Book_Store.Controllers
 {
     public class UserController : Controller
@@ -15,6 +18,34 @@ namespace Book_Store.Controllers
         public UserController()
         {
             user = new Data.Repository.User(new BookStoreModel());
+        }
+        [HttpGet]
+        public ActionResult Index2(Models.UserViewModel model)
+        {
+            /*            dynamic mymodel = new ExpandoObject();
+                        mymodel.Register = new Book_Store.Models.Register();
+                        mymodel.Login = new Book_Store.Models.Login();*/
+            return View(new Models.UserViewModel { Login = new Models.Login(), Register = new Models.Register() });
+        }
+        [HttpPost]
+        public ActionResult Register(Models.Register register)
+        {
+            TempData["registermessage"] = null;
+            user.AddUser(Book_Store.Mapper.UserMapper.Map(register));
+            TempData["registermessage"] = "Registered Successfully";
+            return RedirectToAction("Index2");
+        }
+        [HttpPost]
+        public ActionResult Login(Models.Login login)
+        {
+            TempData["loginerrormessage"] = null;
+            var result = user.userLogin(login.Email, Book_Store.EncryptionDecryption.EncryptionDecryption.EncryptString(login.Password));
+            if (result == null)
+            {
+                TempData["loginerrormessage"] = "Invalid Credentials";
+                return RedirectToAction("Index2");
+            }
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Index()
         {
@@ -26,15 +57,45 @@ namespace Book_Store.Controllers
             }
             return View(data);
         }
-        public ActionResult GetUserById(int id) {
+        [HttpGet]
+        public ActionResult AddUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddUser(Book_Store.Models.User userdata)
+        {
+            user.AddUser(Book_Store.Mapper.UserMapper.Map(userdata));
+            return RedirectToAction("Index");
+        }
+        public ActionResult GetUserById(int id)
+        {
 
             var findUser = user.GetUserById(id);
             return View(Book_Store.Mapper.UserMapper.Map(findUser));
         }
-        public string UpdateUserById(int id,Data.Entities.User userdata)
+        [HttpGet]
+        public ActionResult UpdateUserById(int id)
         {
-            user.UpdateUserById(id, userdata);
-            return "User updated successfully";
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var userData = user.GetUserById(id);
+
+            if (userData == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Book_Store.Mapper.UserMapper.Map(userData));
+        }
+        [HttpPost]
+        public ActionResult UpdateUserById(int id, Book_Store.Models.User userdata)
+        {
+            if (ModelState.IsValid)
+            {
+                user.UpdateUserById(id, Book_Store.Mapper.UserMapper.Map(userdata));
+                return RedirectToAction("Index");
+            }
+            return View(userdata);
         }
         public string DeleteUserById(int id)
         {

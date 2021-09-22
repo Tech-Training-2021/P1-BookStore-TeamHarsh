@@ -50,7 +50,7 @@ namespace Data.Repository
             var getRole = db.Roles.Where<Data.Entities.Role>(u => u.Role1 == id).First();
             if (getRole != null)
             {
-                db.Roles.AddOrUpdate(role);
+                getRole.Role_Name=role.Role_Name;
                 save();
                 return;
             }

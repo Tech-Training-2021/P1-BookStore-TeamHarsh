@@ -16,5 +16,23 @@ namespace Book_Store.Mapper
                 Store_Name = store.Store_Name
             };
         }
+        public static Data.Entities.Store Map(Book_Store.Models.StoreViewModel store)
+        {
+            return new Data.Entities.Store()
+            {
+                Store_Id = store.Store_Id,
+                Location_Id = store.Location_Id,
+                Store_Name = store.Store_Name
+            };
+        }
+        public static Book_Store.Models.StoreViewModel MapViewModel(Data.Entities.Store store)
+        {
+            return new Book_Store.Models.StoreViewModel()
+            {
+                Store_Id = store.Store_Id,
+                Location_Id = store.Location_Id,
+                Store_Name = store.Store_Name
+            };
+        }
     }
 }

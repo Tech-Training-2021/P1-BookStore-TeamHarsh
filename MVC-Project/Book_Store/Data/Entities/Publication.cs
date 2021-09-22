@@ -21,7 +21,6 @@ namespace Data.Entities
         [Required]
         [StringLength(100)]
         public string Publisher_Name { get; set; }
-
         [Column(TypeName = "date")]
         public DateTime Publication_Date { get; set; }
 

@@ -47,12 +47,18 @@ namespace Data.Repository
             db.Stores.Add(store);
             save();
         }
+        public IEnumerable<Data.Entities.Location> GetLocations()
+        {
+            return db.Locations
+                  .ToList();
+        }
         public void UpdateStoreById(int id, Data.Entities.Store store)
         {
             var getStore = db.Stores.Where<Data.Entities.Store>(u => u.Store_Id == id).First();
             if (getStore != null)
             {
-                db.Stores.AddOrUpdate(store);
+                getStore.Location_Id = store.Location_Id;
+                getStore.Store_Name = store.Store_Name;
                 save();
                 return;
             }

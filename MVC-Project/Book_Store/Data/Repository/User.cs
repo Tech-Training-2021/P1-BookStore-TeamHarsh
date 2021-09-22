@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class User:IUser
+    public class User : IUser
     {
         private BookStoreModel db;
         public User(BookStoreModel db)
@@ -44,17 +44,39 @@ namespace Data.Repository
                 throw new ArgumentException("Id cannot be less than 0");
             }
         }
+        public Data.Entities.User userLogin(string email, string password)
+        {
+            var finduser = db.Users
+                    .Include(g => g.Role)
+                    .Where(c => c.Email == email && c.Password == password)
+                    .FirstOrDefault();
+            /* var finduser = (from userdata in db.Users
+                             where ((userdata.Email == user.Email) && (userdata.Password == user.Password))
+                             select userdata).FirstOrDefault();*/
+            if (finduser == null)
+            {
+                return null;
+            }
+            else
+            {
+                return finduser;
+            }
+        }
         public void AddUser(Data.Entities.User user)
         {
             db.Users.Add(user);
             save();
         }
-        public void UpdateUserById(int id,Data.Entities.User user)
+        public void UpdateUserById(int id, Data.Entities.User user)
         {
             var getUser = db.Users.Where<Data.Entities.User>(u => u.User_Id == id).First();
             if (getUser != null)
             {
-                db.Users.AddOrUpdate(user);
+                getUser.FirstName = user.FirstName;
+                getUser.LastName = user.LastName;
+                getUser.MobileNumber = user.MobileNumber;
+                getUser.Email = user.Email;
+                getUser.Password = user.Password;
                 save();
                 return;
             }

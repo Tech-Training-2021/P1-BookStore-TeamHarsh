@@ -50,7 +50,7 @@ namespace Data.Repository
             var getLocation = db.Locations.Where<Data.Entities.Location>(u => u.Location_Id == id).First();
             if (getLocation != null)
             {
-                db.Locations.AddOrUpdate(location);
+                getLocation.Location_Name = location.Location_Name;
                 save();
                 return;
             }

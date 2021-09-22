@@ -15,5 +15,13 @@ namespace Book_Store.Mapper
                 Location_Name = location.Location_Name
             };
         }
+        public static Data.Entities.Location Map(Book_Store.Models.Location location)
+        {
+            return new Data.Entities.Location()
+            {
+                Location_Id = location.Location_Id,
+                Location_Name = location.Location_Name
+            };
+        }
     }
 }

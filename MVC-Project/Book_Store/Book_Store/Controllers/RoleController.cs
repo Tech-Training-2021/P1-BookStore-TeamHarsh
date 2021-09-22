@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Data;
 using Data.Entities;
 using Data.Repository;
+using System.Net;
 namespace Book_Store.Controllers
 {
     public class RoleController : Controller
@@ -26,17 +27,48 @@ namespace Book_Store.Controllers
             }
             return View(data);
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Book_Store.Models.Role roledata)
+        {
+            role.AddRole(Book_Store.Mapper.RoleMapper.Map(roledata));
+            return RedirectToAction("Index");
+        }
+
         public ActionResult GetRoleById(int id)
         {
             var findRole = role.GetRoleById(id);
             return View(Book_Store.Mapper.RoleMapper.Map(findRole));
         }
-        public string UpdateRoleById(int id, Data.Entities.Role roledata)
+
+        [HttpGet]
+        public ActionResult UpdateRoleById(int id)
         {
-            role.UpdateRoleById(id, roledata);
-            return "Role updated successfully";
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var roleData = role.GetRoleById(id);
+
+            if (roleData == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Book_Store.Mapper.RoleMapper.Map(roleData));
         }
-        public string DeleteUserById(int id)
+        [HttpPost]
+        public ActionResult UpdateRoleById(int id, Book_Store.Models.Role roledata)
+        {
+            if (ModelState.IsValid)
+            {
+                role.UpdateRoleById(id, Book_Store.Mapper.RoleMapper.Map(roledata));
+                return RedirectToAction("Index");
+            }
+            return View(roledata);
+        }
+        public string DeleteRoleById(int id)
         {
             role.DeleteRoleById(id);
             return "Role is successfully deleted";

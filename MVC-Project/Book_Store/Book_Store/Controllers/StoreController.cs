@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using Data.Entities;
+using System.Net;
 using Data.Repository;
 namespace Book_Store.Controllers
 {
@@ -15,6 +16,47 @@ namespace Book_Store.Controllers
         public StoreController()
         {
             store = new Data.Repository.Store(new BookStoreModel());
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.Location = new SelectList(store.GetLocations(), "Location_Id", "Location_Name");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Book_Store.Models.StoreViewModel storedata)
+        {
+            store.AddStore(Book_Store.Mapper.StoreMapper.Map(storedata));
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult UpdateStoreById(int id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var storeData = store.GetStoreById(id);
+
+            if (storeData == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ViewBag.Location = new SelectList(store.GetLocations(), "Location_Id", "Location_Name");
+                TempData["location"] = storeData.Location_Id;
+            }
+            return View(Book_Store.Mapper.StoreMapper.MapViewModel(storeData));
+        }
+        [HttpPost]
+        public ActionResult UpdateStoreById(int id, Book_Store.Models.StoreViewModel storeData)
+        {
+            if (ModelState.IsValid)
+            {
+                store.UpdateStoreById(id, Book_Store.Mapper.StoreMapper.Map(storeData));
+                return RedirectToAction("Index");
+            }
+            return View(storeData);
         }
         public ActionResult Index()
         {
@@ -33,19 +75,6 @@ namespace Book_Store.Controllers
             return View(Book_Store.Mapper.StoreMapper.Map(findStore));
         }
 
-
-        [HttpGet]
-        public string UpdateStoreById(int id)
-        {
-            //store.UpdateStoreById(id, StoreData);
-            return "Store updated successfully";
-        }
-        [HttpPost]
-        public string UpdateStoreById(int id, Data.Entities.Store StoreData)
-        {
-            store.UpdateStoreById(id, StoreData);
-            return "Store updated successfully";
-        }
         public string DeleteStoreById(int id)
         {
             store.DeleteStoreById(id);
