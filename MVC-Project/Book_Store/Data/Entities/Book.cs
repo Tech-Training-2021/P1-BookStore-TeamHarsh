@@ -14,6 +14,7 @@ namespace Data.Entities
         {
             Carts = new HashSet<Cart>();
             Order_Details = new HashSet<Order_Details>();
+            OrderHistories = new HashSet<OrderHistory>();
         }
 
         [Key]
@@ -36,5 +37,8 @@ namespace Data.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderHistory> OrderHistories { get; set; }
     }
 }

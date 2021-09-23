@@ -42,7 +42,23 @@ namespace Book_Store.Controllers
                 TempData["loginerrormessage"] = "Invalid Credentials";
                 return RedirectToAction("Index2");
             }
-            return RedirectToAction("Index", "Home");
+            var role = result.Role_Id;
+            if (role == 1)
+            {
+                Session["UserId"] = result.User_Id;
+                Session["FirstName"] = result.FirstName;
+                Session["LastName"] = result.LastName;
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (role == 2)
+            {
+                Session["UserId"] = result.User_Id;
+                Session["FirstName"] = result.FirstName;
+                Session["LastName"] = result.LastName;
+                return RedirectToAction("Index", "Admin");
+
+            }
+            return null;
         }
         public ActionResult Index()
         {
@@ -99,5 +115,12 @@ namespace Book_Store.Controllers
             user.DeleteUserById(id);
             return "User is successfully deleted";
         }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index2", "User");
+        }
+
+
     }
 }

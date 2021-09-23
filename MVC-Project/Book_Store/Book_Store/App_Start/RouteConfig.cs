@@ -12,29 +12,21 @@ namespace Book_Store
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
+               name: "Default",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+           );
             routes.MapRoute(
-                name: "User",
+                name: "Admin",
                 url: "{controller}/{action}",
-                defaults: new { controller = "User", action = "Index" }
+                defaults: new { controller = "Admin", action = "Index" }
             );
             routes.MapRoute(
-                name: "UserById",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "GetUserById" }
-            );
-            routes.MapRoute(
-                  name: "DeleteUserByUserID",
-                  url: "{controller}/{action}/{id}",
-                  defaults: new { controller = "User", action = "DeleteUserById" }
-              );
+                 name: "Customer",
+                 url: "{controller}/{action}",
+                 defaults: new { controller = "Customer", action = "Home" }
+             );
         }
     }
 }

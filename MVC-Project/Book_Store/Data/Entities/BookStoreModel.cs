@@ -21,6 +21,7 @@ namespace Data.Entities
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<OrderHistory> OrderHistories { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
@@ -36,6 +37,11 @@ namespace Data.Entities
 
             modelBuilder.Entity<Book>()
                 .HasMany(e => e.Order_Details)
+                .WithRequired(e => e.Book)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Book>()
+                .HasMany(e => e.OrderHistories)
                 .WithRequired(e => e.Book)
                 .WillCascadeOnDelete(false);
 

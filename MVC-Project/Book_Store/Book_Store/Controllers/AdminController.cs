@@ -7,7 +7,10 @@ using Data;
 using Data.Entities;
 using Data.Repository;
 using System.Net;
+using System.IO;
+using System.Security.Cryptography;
 using System.Dynamic;
+using System.Text;
 namespace Book_Store.Controllers
 {
     public class AdminController : Controller
@@ -18,7 +21,7 @@ namespace Book_Store.Controllers
         Data.Repository.Location location;
         Data.Repository.Category category;
         Data.Repository.Book book;
-
+        Data.Repository.OrderRepository order;
         public AdminController()
         {
             user = new Data.Repository.User(new BookStoreModel());
@@ -26,14 +29,23 @@ namespace Book_Store.Controllers
             location = new Data.Repository.Location(new BookStoreModel());
             category = new Data.Repository.Category(new BookStoreModel());
             book = new Data.Repository.Book(new Data.Entities.BookStoreModel());
-
+            order = new Data.Repository.OrderRepository(new Data.Entities.BookStoreModel());
         }
         public ActionResult Index()
         {
             return View();
         }
 
-
+        public ActionResult GetOrderHistory()
+        {
+            var data = order.getAllOrders();
+            var data2 = new List<Book_Store.Models.OrderHistory>();
+            foreach (var d in data)
+            {
+                data2.Add(Book_Store.Mapper.OrderHistoryMapper.Map(d));
+            }
+            return View(data2);
+        }
 
 
         public ActionResult GetBooks()
@@ -335,6 +347,13 @@ namespace Book_Store.Controllers
         {
             user.DeleteUserById(id);
             return "User is successfully deleted";
+        }
+
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index2", "User");
         }
     }
 }

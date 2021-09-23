@@ -80,7 +80,7 @@ namespace Data.Repository
                     Language = book.Book_Detail.Language,
                     Total_Pages = book.Book_Detail.Total_Pages
                 };
-                db.Books.AddOrUpdate(getBook);
+                /*db.Books.AddOrUpdate(getBook);*/
                 save();
                 return;
             }

@@ -28,7 +28,7 @@ namespace Book_Store.Mapper
                 LastName = user.LastName,
                 MobileNumber = user.MobileNumber,
                 Email = user.Email,
-                Password = user.Password,
+                Password = Book_Store.EncryptionDecryption.EncryptionDecryption.EncryptString(user.Password),
                 Role_Id = 1,
             };
         }
