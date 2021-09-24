@@ -5,41 +5,49 @@
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
+<div class="container">
 <h2>OrderHistory</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Book_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total_Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th></th>
-    </tr>
+<br />
+    @foreach (var item in Model.OrderByDescending(x => x.date).GroupBy(y => y.date))
+    {<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total_Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var i in item)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Book_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Total_Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.date)
+                    </td>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total_Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
+                </tr>
+            }
 
-        </tr>
+        </table>
+        <hr />
+        <br />
+
     }
 
-</table>
+</div>

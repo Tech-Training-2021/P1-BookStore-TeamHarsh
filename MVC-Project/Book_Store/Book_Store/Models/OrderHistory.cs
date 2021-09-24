@@ -17,8 +17,10 @@ namespace Book_Store.Models
         public string Book_Id { get; set; }
 
         public int Quantity { get; set; }
+        [DisplayName("Total Price")]
 
         public int Total_Price { get; set; }
+        [DisplayName("Order Date")]
 
         public DateTime date { get; set; }
 
